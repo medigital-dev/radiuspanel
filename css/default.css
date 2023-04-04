@@ -1,0 +1,30 @@
+/*
+    Design by: @mesaidlg
+*/
+
+body {
+    background-color: #f1f1f1;
+}
+
+.content {
+    width: 900px;
+    height: 520px;
+    margin-top: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    background-color: white;
+}
+.footer {
+    width: 100%;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 12px;
+	color: #004C94;
+    text-align: center;
+    border-top: 2px solid #DFDFDF;
+}
+.footer a {
+	text-decoration: none;
+}
