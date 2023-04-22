@@ -153,7 +153,7 @@ if (isset($_POST["sys_off"])) {
 							<tr>
 								<td>RadiusPanel Versi</td>
 								<td>:</td>
-								<td>v.1</td>
+								<td>v.1.1</td>
 							</tr>
 						</table>
 						</p>
