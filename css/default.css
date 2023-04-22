@@ -16,15 +16,24 @@ body {
     background-color: white;
 }
 .footer {
+    bottom: 0;
+    position: fixed;
+    background-color: #545454;
     width: 100%;
 	margin-top: 10px;
 	margin-left: auto;
 	margin-right: auto;
 	font-size: 12px;
-	color: #004C94;
+	color: #fff;
     text-align: center;
     border-top: 2px solid #DFDFDF;
+    padding: 1rem;
 }
 .footer a {
 	text-decoration: none;
+    color: #fff;
+}
+
+.footer a:hover {
+    color: #7abfff;
 }
