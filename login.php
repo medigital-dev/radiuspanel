@@ -58,15 +58,21 @@ $jumlahAdmin = count(query("SELECT * FROM admin"));
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RadiusPanel</title>
+    <title>RadiusPanel - Login</title>
+    <link rel="shortcut icon" href="img/icon_RadiusPanel-white.png" type="image/x-icon">
     <link rel="stylesheet" href="css/fontawesome.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/default.css">
+    <style>
+        body {
+            background-color: #F7F4F3;
+        }
+    </style>
 </head>
 
 <body>
     <form action="" method="post">
-        <div style="width: 300px; height: 300px; background-color: #ffffff; border: 3px solid darkblue; border-radius: 10px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); line-height: 1.5;">
+        <div style="width: 300px; height: 300px; background-color: #fff; border: 3px solid darkblue; border-radius: 10px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); line-height: 1.2;">
             <div align="center">
                 <div style="width: 100%; margin-top: 2px; margin-bottom: 2px;">
                     <img src="img/RadiusPanel.png" width="95%">
@@ -109,9 +115,11 @@ $jumlahAdmin = count(query("SELECT * FROM admin"));
                     <p style="color: red; font-weight: bold" colspan="3">Koneksi Database ERROR.<br>Cek db_koneksi.php</p-lg-3>
                     <?php endif; ?>
             </center>
+            <div class="small text-muted text-center">
+                &copy; 2023 Dibuat dan dikembangkan oleh <a href="https://muhsaidlg.my.id" target="blank">Muhammad Said Latif Ghofari</a> - v1.1
+            </div>
         </div>
     </form>
-
 
     <script>
         function ShowPassword() {

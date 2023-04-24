@@ -1,5 +1,5 @@
 <?php 
-    include 'db_koneksi.php';
+    include 'dbconn.php';
 
     function query($query) {
         global $conn;
@@ -81,6 +81,3 @@
 		
 	return mysqli_affected_rows($conn);
 }
-
-    
-?>

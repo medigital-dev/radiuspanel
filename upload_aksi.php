@@ -1,6 +1,6 @@
 <?php 
 
-	include 'db_koneksi.php';
+	include 'dbconn.php';
 	include "excel-reader/excel_reader2.php";
 
 	$target = basename($_FILES['file']['name']) ;
@@ -25,4 +25,3 @@
 	unlink($_FILES['file']['name']);
 
 	header("location: import_user.php?berhasil=$berhasil");
-?>
