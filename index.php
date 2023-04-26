@@ -172,6 +172,7 @@ if (isset($_POST["sys_off"])) {
 							<i class="fas fa-redo-alt"></i>
 							Restart
 						</button>
+						<button class="btn btn-sm btn-primary" type="button" id="btn-update"><i class="fas fa-sync-alt mr-1"></i>Update</button>
 					</div>
 				</div>
 				<div class="card">
@@ -223,9 +224,21 @@ if (isset($_POST["sys_off"])) {
 
 	<?php include 'footer.html'; ?>
 
-	<script src="js/jquery-3.5.1.slim.min.js"></script>
+	<script src="js/jquery.min.js"></script>
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$('#btn-update').click(async function() {
+				$(this).children('i').toggleClass('fa-spin');
+				const radiuspanel = await fetch('https://api.github.com/repos/medigital-dev/radiuspanel/releases/latest').then(response => response.json()).catch(response => console.log(response));
+				$.post('update.php', radiuspanel, response => console.log(response));
+				$(this).children('i').toggleClass('fa-spin');
+
+			});
+		});
+	</script>
 </body>
 
 </html>
