@@ -9,7 +9,7 @@ if (!isset($_SESSION["login"])) {
 
 require 'functions.php';
 
-$online = query("SELECT * FROM radacct ORDER BY acctstarttime DESC");
+$online = query("SELECT * FROM radacct LEFT JOIN organization ON radacct.username = organization.username ORDER BY radacct.acctstarttime DESC");
 
 $navigasi = "";
 $navigasi = "user";
@@ -28,6 +28,8 @@ $navigasi = "user";
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/default.css">
 	<link rel="stylesheet" href="css/datatables.min.css">
+	<link rel="stylesheet" href="css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="css/responsive.bootstrap4.min.css">
 </head>
 
 <body>
@@ -40,11 +42,13 @@ $navigasi = "user";
 					<div class="card-header text-white bg-primary font-weight-bold">DATA AKUN ONLINE</div>
 					<div class="card-body">
 						<div class="table-responsive">
-							<table class="table table-bordered table-striped table-hover" id="datatables">
+							<table class="table table-bordered table-striped table-hover w-100" id="datatables">
 								<thead style="background-color: #004C94; color: white;">
 									<tr align="center">
 										<th>ID</th>
 										<th>Username</th>
+										<th>Name</th>
+										<th>Class</th>
 										<th>IP Address</th>
 										<th>Mac Address</th>
 										<th>Start Time</th>
@@ -66,6 +70,8 @@ $navigasi = "user";
 										<tr>
 											<td align="center"><?= $i; ?></td>
 											<td><?= $row["username"]; ?></td>
+											<td><?= $row["name"]; ?></td>
+											<td><?= $row["class"]; ?></td>
 											<td align="center"><?= $row["framedipaddress"]; ?></td>
 											<td align="center"><?= $row["callingstationid"]; ?></td>
 											<td align="center"><?= $row["acctstarttime"]; ?></td>
@@ -89,13 +95,22 @@ $navigasi = "user";
 
 	<?php include 'footer.html'; ?>
 
-	<script src="js/jquery-3.5.1.slim.min.js"></script>
-	<script src="js/popper.min.js"></script>
+	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/popper.min.js"></script>
 	<script src="js/datatables.min.js"></script>
+	<script src="js/dataTables.bootstrap4.min.js"></script>
+	<script src="js/responsive.bootstrap4.min.js"></script>
+
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#datatables').DataTable();
+			$('#datatables').DataTable({
+				responsive: true,
+				lengthMenu: [
+					[5, 10, 25, 50, -1],
+					[5, 10, 25, 50, 'All'],
+				],
+			});
 		});
 	</script>
 </body>

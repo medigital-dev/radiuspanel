@@ -4,8 +4,8 @@ require 'functions.php';
 
 $id = $_GET["id"];
 
-if( delete($id) > 0 ) {
-echo "
+if (delete($id) > 0) {
+	echo "
 	<script>
 		alert('Data Berhasil dihapus!');
 		document.location.href = 'users.php';
@@ -19,5 +19,3 @@ echo "
 	</script>
 	";
 }
-
-?>

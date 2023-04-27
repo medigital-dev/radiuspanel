@@ -11,7 +11,7 @@ require 'functions.php';
 
 $id = $_GET["id"];
 
-$user = query("SELECT * FROM radcheck WHERE id = $id")[0];
+$user = query("SELECT radcheck.id AS radcheck_id, radcheck.value AS passwd, radcheck.username AS radcheck_username, organization.username AS org_username, organization.name AS nama, organization.division AS division, organization.class AS class, organization.registered_at as registered_at FROM radcheck LEFT JOIN organization ON radcheck.username = organization.username WHERE radcheck.id = '$id'")[0];
 
 if (isset($_POST["submit"])) {
 
@@ -53,43 +53,52 @@ $navigasi = "user";
 
 	<?php include 'navigasi.html'; ?>
 
-	<div class="container" style="margin-top: 80px; min-height: 510px;">
-
-		<form action="" method="POST">
-			<input type="hidden" name="id" value="<?php echo $user["id"]; ?>">
-
-			<div style="width: 400px; height: 400px; border-radius: 10px; position: absolute; left: 50%; transform: translate(-50%, 0); border: 2px solid darkblue; background-color: white">
-				<div align="center" style="width: 100%">
-					<div style="width: 100%; background-color: darkblue; color: white; text-align: center; height: 50px; border-radius: 7px 7px 0 0; padding: 14px; font-weight: bold;">
+	<div class="container pt-3" style="padding-bottom: 5rem;">
+		<div class="row">
+			<div class="col-lg-4 mx-auto">
+				<div class="card shadow">
+					<div class="card-header bg-primary text-white font-weight-bold">
 						EDIT USER
 					</div>
-				</div>
-				<div style="margin: 17px; width: 90%">
-					<div class="form-group">
-						<label for="username">Username</label>
-						<input name="username" type="text" class="form-control" id="username" aria-describedby="nisHelp" placeholder="Enter NIS" value="<?php echo $user["username"]; ?>" required>
+					<div class="card-body">
+						<form action="" method="POST">
+							<input type="hidden" name="id" value="<?= $user["radcheck_id"]; ?>">
+							<div class="form-group">
+								<label for="username">Username</label>
+								<input name="username" type="text" class="form-control" id="username" aria-describedby="nisHelp" placeholder="Enter Username" value="<?= $user["radcheck_username"]; ?>" required>
+							</div>
+							<div class="form-group">
+								<label for="name">Nama</label>
+								<input name="name" type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Input name" value="<?= $user["nama"]; ?>" required>
+							</div>
+							<div class="form-group">
+								<label for="division">Division</label>
+								<input name="division" type="text" class="form-control" id="division" aria-describedby="divisionHelp" placeholder="Input division" value="<?= $user["division"]; ?>" required>
+							</div>
+							<div class="form-group">
+								<label for="class">Class</label>
+								<input name="class" type="text" class="form-control" id="class" aria-describedby="classHelp" placeholder="Input class" value="<?= $user["class"]; ?>" required>
+							</div>
+							<div class="form-group">
+								<label for="password">Password</label>
+								<input name="password" type="password" class="form-control" id="password" aria-describedby="PasswordHelp" placeholder="Enter Password" value="<?= $user["passwd"]; ?>" required>
+							</div>
+							<div class="d-flex justify-content-between">
+								<a class="btn btn-warning" href="users.php" title="Kembali">Kembali</a>
+								<button class="btn btn-primary" type="submit" name="submit">Edit User</button>
+							</div>
+						</form>
 					</div>
-					<div class="form-group">
-						<label for="password">Password</label>
-						<input name="value" type="text" class="form-control" id="password" aria-describedby="PasswordHelp" placeholder="Enter Password" value="<?php echo $user["value"]; ?>" required>
-					</div>
-				</div>
-				<div style="position: fixed; left: 20px; bottom: 20px">
-					<a class="btn btn-warning" href="/" title="Kembali">Kembali</a>
-				</div>
-				<div align="center" style="position: fixed;right: 20px; bottom: 20px;">
-					<button class="btn btn-primary" type="submit" name="submit">Edit User</button>
 				</div>
 			</div>
-		</form>
-
+		</div>
 	</div>
 
 	<?php include 'footer.html'; ?>
 
-	<script src="js/jquery-3.5.1.slim.min.js"></script>
-	<script src="js/popper.min.js"></script>
+	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/popper.min.js"></script>
 
 </body>
 

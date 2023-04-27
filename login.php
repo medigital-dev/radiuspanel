@@ -121,6 +121,9 @@ $jumlahAdmin = count(query("SELECT * FROM admin"));
         </div>
     </form>
 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/popper.min.js"></script>
     <script>
         function ShowPassword() {
             var x = document.getElementById("passwords");
@@ -131,10 +134,6 @@ $jumlahAdmin = count(query("SELECT * FROM admin"));
             }
         }
     </script>
-    <!-- Optional JavaScript -->
-    <script src="js/jquery-3.5.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>

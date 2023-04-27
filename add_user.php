@@ -17,14 +17,14 @@ if (isset($_POST["submit"])) {
 		echo "
 			<script>
 				alert('Data Berhasil ditambahkan');
-				document.location.href = 'add_user.php';
+				// document.location.href = 'add_user.php';
 			</script>
 		";
 	} else {
 		echo "
 			<script>
 				alert('Data gagal ditambahkan');
-				document.location.href = 'add_user.php';
+				// document.location.href = 'add_user.php';
 			</script>
 			";
 	}
@@ -49,7 +49,7 @@ if (isset($_POST["submit"])) {
 	<?php include 'navigasi.html'; ?>
 
 	<form action="" method="POST">
-		<div class="container py-4">
+		<div class="container pt-3" style="padding-bottom: 5rem;">
 			<div class="row">
 				<div class="col-lg-4 mx-auto">
 					<div class="card shadow">
@@ -62,8 +62,20 @@ if (isset($_POST["submit"])) {
 								<input name="username" type="text" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Input username" required>
 							</div>
 							<div class="form-group">
+								<label for="name">Nama</label>
+								<input name="name" type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Input name" required>
+							</div>
+							<div class="form-group">
+								<label for="division">Division</label>
+								<input name="division" type="text" class="form-control" id="division" aria-describedby="divisionHelp" placeholder="Input division" required>
+							</div>
+							<div class="form-group">
+								<label for="class">Class</label>
+								<input name="class" type="text" class="form-control" id="class" aria-describedby="classHelp" placeholder="Input class" required>
+							</div>
+							<div class="form-group">
 								<label for="password">Password</label>
-								<input name="value" type="text" class="form-control" id="password" aria-describedby="PasswordHelp" placeholder="Input password" required>
+								<input name="password" type="password" class="form-control" id="password" aria-describedby="PasswordHelp" placeholder="Input password" required>
 							</div>
 							<button class="btn btn-primary" type="submit" name="submit">
 								<i class="fas fa-plus"></i>
@@ -78,9 +90,9 @@ if (isset($_POST["submit"])) {
 
 	<?php include 'footer.html'; ?>
 
-	<script src="js/jquery-3.5.1.slim.min.js"></script>
-	<script src="js/popper.min.js"></script>
+	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/popper.min.js"></script>
 </body>
 
 </html>

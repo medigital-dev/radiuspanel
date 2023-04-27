@@ -76,145 +76,149 @@ if (isset($_POST["sys_off"])) {
 	<!-- end Navigasi -->
 
 	<div class="container pt-3" style="padding-bottom: 5rem;">
-		<div class="card-deck">
-			<div class="card text-white bg-primary">
-				<div class="card-header">
-					<i class="fas fa-users" aria-hidden="true"></i>
-					User
-				</div>
-				<div class="card-body">
-					<p class="card-text" style="font-size: 40px;"><?= $jmlUser; ?><span style="font-size: 20px;"> user</span></p>
-				</div>
-				<div class="card-footer bg-transparent">
-					<a href="users.php" style="color: white; text-decoration: none;">
-						Selengkapnya <i class="fas fa-angle-right" aria-hidden="true"></i>
-					</a>
-				</div>
-			</div>
-			<div class="card text-white bg-secondary">
-				<div class="card-header">
-					<i class="fas fa-circle" aria-hidden="true" style="color: lime;"></i>
-					Online User
-				</div>
-				<div class="card-body">
-					<p class="card-text" style="font-size: 40px;"><?= $jmlOnline; ?><span style="font-size: 20px;"> user</span></p>
-				</div>
-				<div class="card-footer bg-transparent"><a href="online_user.php" style="color: white; text-decoration: none;">
-						Selengkapnya <i class="fas fa-angle-right" aria-hidden="true"></i>
-					</a>
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			<div class="col mb-4">
+				<div class="card shadow text-white bg-primary">
+					<div class="card-header">
+						<i class="fas fa-users" aria-hidden="true"></i>
+						User
+					</div>
+					<div class="card-body">
+						<p class="card-text" style="font-size: 40px;"><?= $jmlUser; ?><span style="font-size: 20px;"> user</span></p>
+					</div>
+					<div class="card-footer bg-transparent">
+						<a href="users.php" style="color: white; text-decoration: none;">
+							Selengkapnya <i class="fas fa-angle-right" aria-hidden="true"></i>
+						</a>
+					</div>
 				</div>
 			</div>
-			<div class="card text-white bg-warning">
-				<div class="card-header">
-					<i class="fas fa-clipboard-check"></i>
-					Akses Log
+			<div class="col mb-4">
+				<div class="card shadow text-white bg-secondary">
+					<div class="card-header">
+						<i class="fas fa-circle" aria-hidden="true" style="color: lime;"></i>
+						Online User
+					</div>
+					<div class="card-body">
+						<p class="card-text" style="font-size: 40px;"><?= $jmlOnline; ?><span style="font-size: 20px;"> user</span></p>
+					</div>
+					<div class="card-footer bg-transparent"><a href="online_user.php" style="color: white; text-decoration: none;">
+							Selengkapnya <i class="fas fa-angle-right" aria-hidden="true"></i>
+						</a>
+					</div>
 				</div>
-				<div class="card-body">
-					<p class="card-text" style="font-size: 40px;"><?= $jmlLog; ?><span style="font-size: 20px;"> list</span></p>
-				</div>
-				<div class="card-footer bg-transparent"><a href="log.php" style="color: white; text-decoration: none;">
-						Selengkapnya <i class="fas fa-angle-right" aria-hidden="true"></i>
-					</a>
+			</div>
+			<div class="col mb-4">
+				<div class="card shadow text-white bg-warning">
+					<div class="card-header">
+						<i class="fas fa-clipboard-check"></i>
+						Akses Log
+					</div>
+					<div class="card-body">
+						<p class="card-text" style="font-size: 40px;"><?= $jmlLog; ?><span style="font-size: 20px;"> list</span></p>
+					</div>
+					<div class="card-footer bg-transparent"><a href="log.php" style="color: white; text-decoration: none;">
+							Selengkapnya <i class="fas fa-angle-right" aria-hidden="true"></i>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
-
 		<form action="" method="POST">
-			<div class="card-deck" style="margin-top: 30px;">
-				<div class="card">
-					<div class="card-header">
-						<i class="fa fa-info-circle" aria-hidden="true"></i>
-						Informasi FreeRadius
-					</div>
-					<div class="card-body">
-						<p class="card-text" style="margin: 0;">
-						<table style="width: 70%;">
-							<tr>
-								<td style="width: 150px;">FreeRadius Versi</td>
-								<td style="width: 15px;">:</td>
-								<td><?= $radver; ?></td>
-							</tr>
-							<tr>
-								<td>FreeRadius Status</td>
-								<td>:</td>
-								<td>
-									<?php if ($radstat == "active") : ?>
-										<div class="spinner-grow spinner-grow-sm text-success" role="status">
-											<span class="sr-only">Loading... </span>
-										</div>
-										Aktif
-									<?php elseif ($radstat == "inactive") : ?>
-										<div class="spinner-grow spinner-grow-sm text-danger" role="status">
-											<span class="sr-only">Loading... </span>
-										</div>
-										Inactive
-									<?php endif; ?>
-								</td>
-							</tr>
-							<tr>
-								<td>RadiusPanel Versi</td>
-								<td>:</td>
-								<td>v.1.1</td>
-							</tr>
-						</table>
-						</p>
-					</div>
-					<div class="card-footer bg-transparent border-success">
-						<button class="btn btn-sm btn-success" type="submit" name="rad_start">
-							<i class="fas fa-play"></i>
-							Start
-						</button>
-						<button class="btn btn-sm btn-danger" type="submit" name="rad_stop">
-							<i class="fas fa-stop"></i>
-							Stop
-						</button>
-						<button class="btn btn-sm btn-warning" type="submit" name="rad_restart">
-							<i class="fas fa-redo-alt"></i>
-							Restart
-						</button>
-						<button class="btn btn-sm btn-primary" type="button" id="btn-update"><i class="fas fa-sync-alt mr-1"></i>Update</button>
+			<div class="row row-cols-1 row-cols-md-2">
+				<div class="col mb-4">
+					<div class="card shadow h-100">
+						<div class="card-header">
+							<i class="fa fa-info-circle" aria-hidden="true"></i>
+							Informasi FreeRadius
+						</div>
+						<div class="card-body">
+							<table style="width: 70%;">
+								<tr>
+									<td style="width: 150px;">FreeRadius Versi</td>
+									<td style="width: 15px;">:</td>
+									<td><?= $radver; ?></td>
+								</tr>
+								<tr>
+									<td>FreeRadius Status</td>
+									<td>:</td>
+									<td>
+										<?php if ($radstat == "active") : ?>
+											<div class="spinner-grow spinner-grow-sm text-success" role="status">
+												<span class="sr-only">Loading... </span>
+											</div>
+											Aktif
+										<?php elseif ($radstat == "inactive") : ?>
+											<div class="spinner-grow spinner-grow-sm text-danger" role="status">
+												<span class="sr-only">Loading... </span>
+											</div>
+											Inactive
+										<?php endif; ?>
+									</td>
+								</tr>
+								<tr>
+									<td>RadiusPanel Versi</td>
+									<td>:</td>
+									<td>v1.20</td>
+								</tr>
+							</table>
+						</div>
+						<div class="card-footer bg-transparent border-success">
+							<button class="btn btn-sm btn-success" type="submit" name="rad_start">
+								<i class="fas fa-play"></i>
+								Start
+							</button>
+							<button class="btn btn-sm btn-danger" type="submit" name="rad_stop">
+								<i class="fas fa-stop"></i>
+								Stop
+							</button>
+							<button class="btn btn-sm btn-warning" type="submit" name="rad_restart">
+								<i class="fas fa-redo-alt"></i>
+								Restart
+							</button>
+						</div>
 					</div>
 				</div>
-				<div class="card">
-					<div class="card-header">
-						<i class="fas fa-server" aria-hidden="true"></i>
-						Informasi System
-					</div>
-					<div class="card-body">
-						<p class="card-text" style="margin: 0;">
-						<table style="width: 100%;">
-							<tr>
-								<td style="width: 150px;">Sistem Operasi</td>
-								<td style="width: 15px;">:</td>
-								<td><?= $os; ?></td>
-							</tr>
-							<tr>
-								<td>Prosessor</td>
-								<td>:</td>
-								<td><?= $processor; ?></td>
-							</tr>
-							<tr>
-								<td>Hardisk</td>
-								<td>:</td>
-								<td><?= $hdd; ?></td>
-							</tr>
-							<tr>
-								<td>RAM</td>
-								<td>:</td>
-								<td><?= $ramused; ?> of <?= $ram; ?></td>
-							</tr>
-						</table>
-						</p>
-					</div>
-					<div class="card-footer bg-transparent border-success">
-						<button class="btn btn-sm btn-warning" type="submit" name="sys_reboot">
-							<i class="fas fa-sync-alt"></i>
-							Reboot
-						</button>
-						<button class="btn btn-sm btn-danger" type="submit" name="sys_off">
-							<i class="fas fa-power-off"></i>
-							Shutdown
-						</button>
+				<div class="col mb-4">
+					<div class="card shadow h-100">
+						<div class="card-header">
+							<i class="fas fa-server" aria-hidden="true"></i>
+							Informasi System
+						</div>
+						<div class="card-body">
+							<table style="width: 100%;">
+								<tr>
+									<td style="width: 150px;">Sistem Operasi</td>
+									<td style="width: 15px;">:</td>
+									<td><?= $os; ?></td>
+								</tr>
+								<tr>
+									<td>Prosessor</td>
+									<td>:</td>
+									<td><?= $processor; ?></td>
+								</tr>
+								<tr>
+									<td>Hardisk</td>
+									<td>:</td>
+									<td><?= $hdd; ?></td>
+								</tr>
+								<tr>
+									<td>RAM</td>
+									<td>:</td>
+									<td><?= $ramused; ?> of <?= $ram; ?></td>
+								</tr>
+							</table>
+						</div>
+						<div class="card-footer bg-transparent border-success">
+							<button class="btn btn-sm btn-warning" type="submit" name="sys_reboot">
+								<i class="fas fa-sync-alt"></i>
+								Reboot
+							</button>
+							<button class="btn btn-sm btn-danger" type="submit" name="sys_off">
+								<i class="fas fa-power-off"></i>
+								Shutdown
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -225,20 +229,8 @@ if (isset($_POST["sys_off"])) {
 	<?php include 'footer.html'; ?>
 
 	<script src="js/jquery.min.js"></script>
-	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-
-	<script>
-		$(document).ready(function() {
-			$('#btn-update').click(async function() {
-				$(this).children('i').toggleClass('fa-spin');
-				const radiuspanel = await fetch('https://api.github.com/repos/medigital-dev/radiuspanel/releases/latest').then(response => response.json()).catch(response => console.log(response));
-				$.post('update.php', radiuspanel, response => console.log(response));
-				$(this).children('i').toggleClass('fa-spin');
-
-			});
-		});
-	</script>
+	<script src="js/popper.min.js"></script>
 </body>
 
 </html>
