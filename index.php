@@ -63,7 +63,7 @@ if (isset($_POST["sys_off"])) {
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>RadiusPanel - Home</title>
-	<link rel="shortcut icon" href="img/icon_RadiusPanel-white.png" type="image/x-icon">
+	<link rel="shortcut icon" href="img/icon_RadiusPanel.png" type="image/x-icon">
 	<link rel="stylesheet" href="css/fontawesome.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/default.css">
@@ -75,7 +75,7 @@ if (isset($_POST["sys_off"])) {
 	<?php include 'navigasi.html'; ?>
 	<!-- end Navigasi -->
 
-	<div class="container pt-3" style="padding-bottom: 5rem;">
+	<div class="container py-3 mb-5">
 		<div class="row row-cols-1 row-cols-md-3 g-4">
 			<div class="col mb-4">
 				<div class="card shadow text-white bg-primary">
@@ -128,7 +128,7 @@ if (isset($_POST["sys_off"])) {
 			<div class="row row-cols-1 row-cols-md-2">
 				<div class="col mb-4">
 					<div class="card shadow h-100">
-						<div class="card-header">
+						<div class="card-header bg-success text-white">
 							<i class="fa fa-info-circle" aria-hidden="true"></i>
 							Informasi FreeRadius
 						</div>
@@ -159,33 +159,31 @@ if (isset($_POST["sys_off"])) {
 								<tr>
 									<td>RadiusPanel Versi</td>
 									<td>:</td>
-									<td>v1.20</td>
+									<td>v1.21</td>
 								</tr>
 							</table>
 						</div>
-						<div class="card-footer bg-transparent border-success">
-							<button class="btn btn-sm btn-success" type="submit" name="rad_start">
-								<i class="fas fa-play"></i>
-								Start
-							</button>
-							<button class="btn btn-sm btn-danger" type="submit" name="rad_stop">
-								<i class="fas fa-stop"></i>
-								Stop
-							</button>
-							<button class="btn btn-sm btn-warning" type="submit" name="rad_restart">
-								<i class="fas fa-redo-alt"></i>
-								Restart
-							</button>
-							<button class="btn btn-sm btn-primary" type="button" id="btn-update">
-								<i class="fas fa-sync-alt mr-1"></i>
-								Cek Update
-							</button>
+						<div class="card-footer bg-transparent text-center">
+							<div class="btn-group btn-group-sm">
+								<button class="btn btn-sm btn-success" title="Start Freeradius" type="submit" name="rad_start">
+									<i class="fas fa-play"></i>
+								</button>
+								<button class="btn btn-sm btn-success" title="Stop Freeradius" type="submit" name="rad_stop">
+									<i class="fas fa-stop"></i>
+								</button>
+								<button class="btn btn-sm btn-success" title="Restart Freeradius" type="submit" name="rad_restart">
+									<i class="fas fa-redo-alt"></i>
+								</button>
+								<button class="btn btn-sm btn-success" title="Cek Update" type="button" id="btn-update">
+									<i class="fas fa-sync-alt mr-1"></i>
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col mb-4">
 					<div class="card shadow h-100">
-						<div class="card-header">
+						<div class="card-header bg-danger text-white">
 							<i class="fas fa-server" aria-hidden="true"></i>
 							Informasi System
 						</div>
@@ -213,21 +211,43 @@ if (isset($_POST["sys_off"])) {
 								</tr>
 							</table>
 						</div>
-						<div class="card-footer bg-transparent border-success">
-							<button class="btn btn-sm btn-warning" type="submit" name="sys_reboot">
-								<i class="fas fa-sync-alt"></i>
-								Reboot
-							</button>
-							<button class="btn btn-sm btn-danger" type="submit" name="sys_off">
-								<i class="fas fa-power-off"></i>
-								Shutdown
-							</button>
+						<div class="card-footer bg-transparent text-center">
+							<div class="btn-group">
+								<button class="btn btn-sm btn-danger" title="Reboot Server" type="submit" name="sys_reboot">
+									<i class="fas fa-sync-alt"></i>
+								</button>
+								<button class="btn btn-sm btn-danger" title="Shutdown Server" type="submit" name="sys_off">
+									<i class="fas fa-power-off"></i>
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</form>
+	</div>
 
+	<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Updating RadiusPanel</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="d-flex align-items-center">
+						<strong>Loading...</strong>
+						<div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true"></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<?php include 'footer.html'; ?>
@@ -239,14 +259,21 @@ if (isset($_POST["sys_off"])) {
 	<script>
 		$(document).ready(function() {
 			$('#btn-update').click(async function() {
-				const currentVersion = 1.20;
+				const currentVersion = 1.21;
 				$(this).children('i').toggleClass('fa-spin');
 				const radiuspanel = await fetch('https://api.github.com/repos/medigital-dev/radiuspanel/releases/latest').then(response => response.json()).catch(response => console.log(response));
 
 				const cloudVersion = radiuspanel.tag_name;
 				if (cloudVersion > currentVersion) {
-					if (confirm('Update RadiusPanel tersedia di Github! Kunjungi sekarang?')) {
-						window.open('https://github.com/medigital-dev/radiuspanel', '_blank');
+					if (confirm('Update RadiusPanel v' + cloudVersion + ' tersedia! Update sekarang?')) {
+						$.post('script/update.php', response => {
+							$('#updateModal').modal('show');
+							if (response == true) {
+								window.open('logout.php', '_self');
+							}
+						});
+						// $(this).children('i').toggleClass('fa-spin');
+						// window.open('https://github.com/medigital-dev/radiuspanel', '_blank');
 					} else {
 						return;
 					}

@@ -41,7 +41,7 @@ $navigasi = "system";
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>RadiusPanel - Administrator</title>
-	<link rel="shortcut icon" href="img/icon_RadiusPanel-white.png" type="image/x-icon">
+	<link rel="shortcut icon" href="img/icon_RadiusPanel.png" type="image/x-icon">
 	<link rel="stylesheet" href="css/fontawesome.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/default.css">
@@ -50,7 +50,7 @@ $navigasi = "system";
 <body>
 	<?php include 'navigasi.html'; ?>
 
-	<div class="container pt-3" style="padding-bottom: 5rem">
+	<div class="container py-3 mb-5">
 		<div class="row">
 			<div class="col-lg-4 mx-auto">
 				<div class="card shadow">

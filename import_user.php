@@ -14,7 +14,7 @@ $navigasi = "user";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RadiusPanel - Import User</title>
-    <link rel="shortcut icon" href="img/icon_RadiusPanel-white.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/icon_RadiusPanel.png" type="image/x-icon">
     <link rel="stylesheet" href="css/fontawesome.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/default.css">
@@ -23,7 +23,7 @@ $navigasi = "user";
 <body>
     <?php include 'navigasi.html'; ?>
 
-    <div class="container py-4">
+    <div class="container py-4 mb-5">
         <form method="post" enctype="multipart/form-data" action="upload_aksi.php">
             <div class="row">
                 <div class="col-lg-4 mx-auto">

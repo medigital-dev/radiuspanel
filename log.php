@@ -9,7 +9,19 @@ if (!isset($_SESSION["login"])) {
 
 require 'functions.php';
 
-$log = query("SELECT * FROM radpostauth LEFT JOIN organization ON radpostauth.username = organization.username ORDER BY authdate DESC");
+$log = query("SELECT 
+	radpostauth.username AS auth_username, 
+	radpostauth.reply AS reply, 
+	radpostauth.authdate AS authdate, 
+	organization.username AS org_username, 
+	organization.name AS nama, 
+	organization.division AS division,
+	radacct.framedipaddress AS framedipaddress,
+	radacct.callingstationid AS callingstationid
+	FROM radpostauth 
+	LEFT JOIN organization ON radpostauth.username = organization.username 
+	LEFT JOIN radacct ON radpostauth.username = radacct.username
+	ORDER BY authdate DESC");
 
 $navigasi = "";
 $navigasi = "log";
@@ -23,7 +35,7 @@ $navigasi = "log";
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>RadiusPanel - Logs</title>
-	<link rel="shortcut icon" href="img/icon_RadiusPanel-white.png" type="image/x-icon">
+	<link rel="shortcut icon" href="img/icon_RadiusPanel.png" type="image/x-icon">
 	<link rel="stylesheet" href="css/fontawesome.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/default.css">
@@ -35,7 +47,7 @@ $navigasi = "log";
 <body>
 	<?php include 'navigasi.html'; ?>
 
-	<div class="container pt-3" style="padding-bottom: 5rem;">
+	<div class="container py-3 mb-5">
 		<div class="row">
 			<div class="col">
 				<div class="card shadow">
@@ -44,38 +56,30 @@ $navigasi = "log";
 						<div class="table-responsive">
 							<table class="table table-bordered table-striped table-hover w-100" id="datatables">
 								<thead style="background-color: #004C94; color: white;">
-									<tr align="center">
-										<th style="width: 10px;">No</th>
-										<th>Username</th>
-										<th>Name</th>
-										<th>Class</th>
-										<th>IP Address</th>
-										<th>Mac Address</th>
-										<th>Reply Status</th>
-										<th>Auth Date</th>
+									<tr class="text-center">
+										<th class="align-middle" style="width: 10px;">No</th>
+										<th class="align-middle">Username</th>
+										<th class="align-middle">Name</th>
+										<th class="align-middle">Divisin</th>
+										<th class="align-middle">IP<br>Address</th>
+										<th class="align-middle">Mac<br>Address</th>
+										<th class="align-middle">Reply<br>Status</th>
+										<th class="align-middle">Auth<br>Date</th>
 									</tr>
 								</thead>
 								<tbody style="background-color: white">
 									<?php $i = 1; ?>
 									<?php foreach ($log as $row) : ?>
-										<?php
-										$username = $row["username"];
-										$result = mysqli_query($conn, "SELECT * FROM radcheck WHERE username = '$username'");
-										$user = mysqli_fetch_assoc($result);
-										$ipMac = mysqli_query($conn, "SELECT * FROM radacct WHERE username ='$username'");
-										$ip = mysqli_fetch_assoc($ipMac);
-										?>
 										<tr>
-											<td align="center"><?= $i; ?></td>
+											<td class="text-center"><?= $i; ?></td>
 											<td><?= $row["username"]; ?></td>
 											<td><?= $row["name"]; ?></td>
-											<td><?= $row["class"]; ?></td>
-											<td align="center"><?= $ip["framedipaddress"] ?></td>
-											<td align="center"><?= $ip["callingstationid"] ?></td>
-											<td align="center"><?= $row["reply"]; ?></td>
-											<td align="center"><?= $row["authdate"]; ?></td>
+											<td class="text-center"><?= $row["division"]; ?></td>
+											<td class="text-center"><?= $row["framedipaddress"] ?></td>
+											<td class="text-center"><?= $row["callingstationid"] ?></td>
+											<td class="text-center"><?= $row["reply"]; ?></td>
+											<td class="text-center"><?= $row["authdate"]; ?></td>
 										</tr>
-
 										<?php $i++; ?>
 									<?php endforeach; ?>
 								</tbody>
@@ -85,7 +89,6 @@ $navigasi = "log";
 				</div>
 			</div>
 		</div>
-
 	</div>
 
 	<?php include 'footer.html'; ?>

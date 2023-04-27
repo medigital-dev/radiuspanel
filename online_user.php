@@ -23,7 +23,7 @@ $navigasi = "user";
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>RadiusPanel - Online User</title>
-	<link rel="shortcut icon" href="img/icon_RadiusPanel-white.png" type="image/x-icon">
+	<link rel="shortcut icon" href="img/icon_RadiusPanel.png" type="image/x-icon">
 	<link rel="stylesheet" href="css/fontawesome.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/default.css">
@@ -35,7 +35,7 @@ $navigasi = "user";
 <body>
 	<?php include 'navigasi.html'; ?>
 
-	<div class="container pt-3" style="padding-bottom: 5rem;">
+	<div class="container py-3 mb-5">
 		<div class="row">
 			<div class="col">
 				<div class="card shadow">
@@ -44,15 +44,15 @@ $navigasi = "user";
 						<div class="table-responsive">
 							<table class="table table-bordered table-striped table-hover w-100" id="datatables">
 								<thead style="background-color: #004C94; color: white;">
-									<tr align="center">
-										<th>ID</th>
-										<th>Username</th>
-										<th>Name</th>
-										<th>Class</th>
-										<th>IP Address</th>
-										<th>Mac Address</th>
-										<th>Start Time</th>
-										<th>Up Time</th>
+									<tr class="text-center">
+										<th class="align-middle">ID</th>
+										<th class="align-middle">Username</th>
+										<th class="align-middle">Name</th>
+										<th class="align-middle">Division</th>
+										<th class="align-middle">IP<br>Address</th>
+										<th class="align-middle">Mac<br>Address</th>
+										<th class="align-middle">Start<br>Time</th>
+										<th class="align-middle">Up<br>Time</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -68,15 +68,15 @@ $navigasi = "user";
 
 										?>
 										<tr>
-											<td align="center"><?= $i; ?></td>
+											<td class="text-center"><?= $i; ?></td>
 											<td><?= $row["username"]; ?></td>
 											<td><?= $row["name"]; ?></td>
-											<td><?= $row["class"]; ?></td>
-											<td align="center"><?= $row["framedipaddress"]; ?></td>
-											<td align="center"><?= $row["callingstationid"]; ?></td>
-											<td align="center"><?= $row["acctstarttime"]; ?></td>
+											<td><?= $row["division"]; ?></td>
+											<td class="text-center"><?= $row["framedipaddress"]; ?></td>
+											<td class="text-center"><?= $row["callingstationid"]; ?></td>
+											<td class="text-center"><?= $row["acctstarttime"]; ?></td>
 
-											<td align="center">
+											<td class="text-center">
 												<?= ($jam == "0") ? "" : "$jam jam"; ?>
 												<?= ($menit == "0") ? "" : " $menit menit"; ?>
 												<?= ($sisaDetik == "0") ? "" : "$sisaDetik detik"; ?>

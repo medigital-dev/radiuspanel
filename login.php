@@ -59,7 +59,7 @@ $jumlahAdmin = count(query("SELECT * FROM admin"));
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RadiusPanel - Login</title>
-    <link rel="shortcut icon" href="img/icon_RadiusPanel-white.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/icon_RadiusPanel.png" type="image/x-icon">
     <link rel="stylesheet" href="css/fontawesome.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/default.css">
@@ -116,7 +116,7 @@ $jumlahAdmin = count(query("SELECT * FROM admin"));
                     <?php endif; ?>
             </center>
             <div class="small text-muted text-center">
-                &copy; 2023 Dibuat dan dikembangkan oleh <a href="https://muhsaidlg.my.id" target="blank">Muhammad Said Latif Ghofari</a> - v1.1
+                &copy; 2023 Dibuat dan dikembangkan oleh <a href="https://muhsaidlg.my.id" target="blank">Muhammad Said Latif Ghofari</a>
             </div>
         </div>
     </form>
