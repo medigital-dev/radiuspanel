@@ -6,6 +6,9 @@ function query($query)
     global $conn;
     $result = mysqli_query($conn, $query);
     $rows = [];
+    if (!$result) {
+        return $rows;
+    }
     while ($row = mysqli_fetch_assoc($result)) {
         $rows[] = $row;
     }
@@ -104,4 +107,13 @@ function changepassword($data)
     mysqli_query($conn, "UPDATE admin SET username = '$username', password = '$newpasswordEncrypth' WHERE id = $id");
 
     return mysqli_affected_rows($conn);
+}
+
+function appsVar()
+{
+    $data = [
+        'appsVers' => '1.22',
+        'dbVers' => '1.0'
+    ];
+    return $data;
 }
