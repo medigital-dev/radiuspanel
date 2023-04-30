@@ -159,7 +159,12 @@ if (isset($_POST["sys_off"])) {
 								<tr>
 									<td>RadiusPanel Versi</td>
 									<td>:</td>
-									<td>v1.21</td>
+									<td>v<?= appsVar()['appsVers']; ?></td>
+								</tr>
+								<tr>
+									<td>Database Versi</td>
+									<td>:</td>
+									<td>v<?= appsVar()['dbVers']; ?></td>
 								</tr>
 							</table>
 						</div>
@@ -259,7 +264,7 @@ if (isset($_POST["sys_off"])) {
 	<script>
 		$(document).ready(function() {
 			$('#btn-update').click(async function() {
-				const currentVersion = 1.21;
+				const currentVersion = <?= appsVar()['appsVers']; ?>;
 				$(this).children('i').toggleClass('fa-spin');
 				const radiuspanel = await fetch('https://api.github.com/repos/medigital-dev/radiuspanel/releases/latest').then(response => response.json()).catch(response => console.log(response));
 
