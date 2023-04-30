@@ -3,7 +3,7 @@
 
         <a class="navbar-brand" href="./">
             <span style="color: #545454; font-family: candara; font-size: 24px; font-weight: bold; font-style: italic;">Radius</span><span style="color: #004C94; font-family: candara; font-size: 24px; font-weight: bold; font-style: italic;">Panel</span>
-            <sup class="text-danger font-weight-bold small" style="font-size: 12px;">v1.21</sup>
+            <sup class="text-danger font-weight-bold small" style="font-size: 12px;">v<?= appsVar()['appsVers']; ?></sup>
         </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -23,19 +23,10 @@
                         User
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="add_user.php">
-                            <i class="fas fa-user-plus"></i>
-                            Add User
-                        </a>
                         <a class="dropdown-item" href="users.php">
                             <i class="fas fa-users"></i>
                             Daftar User
                         </a>
-                        <a class="dropdown-item" href="import_user.php">
-                            <i class="fas fa-file-import"></i>
-                            Import
-                        </a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="online_user.php">
                             <i class="fas fa-circle" style="color: limegreen;"></i>
                             Online User
