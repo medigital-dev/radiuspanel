@@ -1,8 +1,7 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == 'POST') {
-    exec('bash update.sh');
-    echo true;
-} else {
-    echo 'Akses ditolak!';
-    die;
+if ($_SERVER["REQUEST_METHOD"] != 'POST') {
+    die('Akses ditolak!');
 }
+
+exec('bash update.sh');
+echo true;
