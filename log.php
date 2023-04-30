@@ -14,7 +14,7 @@ $log = query("SELECT
 	radpostauth.reply AS reply, 
 	radpostauth.authdate AS authdate, 
 	organization.username AS org_username, 
-	organization.name AS nama, 
+	organization.name AS name, 
 	organization.division AS division,
 	radacct.framedipaddress AS framedipaddress,
 	radacct.callingstationid AS callingstationid
@@ -72,7 +72,7 @@ $navigasi = "log";
 									<?php foreach ($log as $row) : ?>
 										<tr>
 											<td class="text-center"><?= $i; ?></td>
-											<td><?= $row["username"]; ?></td>
+											<td><?= $row["auth_username"]; ?></td>
 											<td><?= $row["name"]; ?></td>
 											<td class="text-center"><?= $row["division"]; ?></td>
 											<td class="text-center"><?= $row["framedipaddress"] ?></td>
