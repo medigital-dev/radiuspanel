@@ -36,14 +36,14 @@ $navigasi = "user";
 	<?php include 'navigasi.html'; ?>
 
 	<div class="container py-3 pb-5 mb-5">
-		<div class="d-none" id="alert">
+		<?php if (isset($_GET['t']) && isset($_GET['s'])) : ?>
 			<div class="alert alert-info alert-dismissible fade show" role="alert">
-				<span id="alertMessage"></span>
+				<?= $_GET['s'] . ' dari ' . $_GET['t'] . ' akun berhasil diimport!'; ?>
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-		</div>
+		<?php endif; ?>
 		<div class="row">
 			<div class="col">
 				<div class="card shadow">
@@ -127,7 +127,7 @@ $navigasi = "user";
 	<div class="modal fade" id="importAccount" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<form method="post" enctype="multipart/form-data" action="upload_aksi.php" id="importForm">
+				<form method="post" enctype="multipart/form-data" action="import.php" id="importForm">
 					<div class="modal-header">
 						<h5 class="modal-title">Import Akun</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -256,27 +256,27 @@ $navigasi = "user";
 				]
 			});
 
-			$('#importForm').on('submit', function(e) {
-				e.preventDefault();
-				var formData = new FormData(this);
-				$.ajax({
-					url: 'ajax/importUser.php',
-					type: 'POST',
-					data: formData,
-					contentType: false,
-					processData: false,
-					dataType: 'json',
-					success: function(response) {
-						$('#alert').toggleClass('d-none');
-						$('#alertMessage').text(response.sukses + ' dari ' + response.total + ' user berhasil diimport!');
-						usertable.ajax.reload(null, false);
-						$('#importAccount').modal('hide');
-					},
-					error: function(xhr, status, error) {
-						console.log(xhr.responseText);
-					}
-				});
-			});
+			// $('#importForm').on('submit', function(e) {
+			// 	e.preventDefault();
+			// 	var formData = new FormData(this);
+			// 	$.ajax({
+			// 		url: 'ajax/importUser.php',
+			// 		type: 'POST',
+			// 		data: formData,
+			// 		contentType: false,
+			// 		processData: false,
+			// 		dataType: 'json',
+			// 		success: function(response) {
+			// 			$('#alert').toggleClass('d-none');
+			// 			$('#alertMessage').text(response.sukses + ' dari ' + response.total + ' user berhasil diimport!');
+			// 			usertable.ajax.reload(null, false);
+			// 			$('#importAccount').modal('hide');
+			// 		},
+			// 		error: function(xhr, status, error) {
+			// 			console.log(xhr.responseText);
+			// 		}
+			// 	});
+			// });
 
 			$('#addAccount').on('hidden.bs.modal', () => $('#addAccountForm')[0].reset());
 			$('#importAccount').on('hidden.bs.modal', () => {
