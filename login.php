@@ -48,8 +48,6 @@ if (isset($_POST["login"])) {
     $error = true;
 }
 
-$jumlahAdmin = count(query("SELECT * FROM admin"));
-
 ?>
 
 <!DOCTYPE html>
@@ -112,7 +110,7 @@ $jumlahAdmin = count(query("SELECT * FROM admin"));
                     <p style="color: red; font-size: 14px">Username / Password salah</p>
                 <?php endif; ?>
                 <?php if (!$conn) : ?>
-                    <p style="color: red; font-weight: bold" colspan="3">Koneksi Database ERROR.<br>Cek db_koneksi.php</p-lg-3>
+                    <p style="color: red; font-weight: bold" colspan="3">Koneksi Database ERROR.<br>Cek dbconn.php</p-lg-3>
                     <?php endif; ?>
             </center>
             <div class="small text-muted text-center">
