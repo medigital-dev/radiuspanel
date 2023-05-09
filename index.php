@@ -232,7 +232,7 @@ if (isset($_POST["sys_off"])) {
 		</form>
 	</div>
 
-	<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="updateModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -271,15 +271,19 @@ if (isset($_POST["sys_off"])) {
 				const cloudVersion = radiuspanel.tag_name;
 				if (cloudVersion > currentVersion) {
 					if (confirm('Update RadiusPanel v' + cloudVersion + ' tersedia! Update sekarang?')) {
+						$('#updateModal').modal('show');
 						$.post('script/update.php', response => {
-							$('#updateModal').modal('show');
 							if (response == true) {
-								window.open('logout.php', '_self');
+								if (confirm('Update berhasil! Logout sekarang?')) {
+									window.open('logout.php', '_self');
+								} else {
+									$(this).children('i').toggleClass('fa-spin');
+									return;
+								}
 							}
 						});
-						// $(this).children('i').toggleClass('fa-spin');
-						// window.open('https://github.com/medigital-dev/radiuspanel', '_blank');
 					} else {
+						$(this).children('i').toggleClass('fa-spin');
 						return;
 					}
 				} else {
