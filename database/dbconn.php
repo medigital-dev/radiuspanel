@@ -2,9 +2,7 @@
 
     $server   = "localhost";
     $user     = "root";
-    $pass     = "";
+    $pass     = "radpass";
     $database = "radius";
 
     $conn = mysqli_connect($server, $user, $pass, $database);
-
-?>
