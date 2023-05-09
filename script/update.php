@@ -19,6 +19,7 @@ if (file_put_contents($path, file_get_contents($url), FILE_APPEND)) {
     shell_exec(`rm -rf /usr/share/radiuspanel/*`);
     shell_exec(`tar zxf /tmp/radiuspanel.tar.gz -C /usr/share/radiuspanel/`);
     shell_exec(`mv /tmp/dbconn.php /usr/share/radiuspanel/`);
+    shell_exec(`rm -rf /tmp/radiuspanel.tar.gz`);
     shell_exec(`chmod -R 777 /usr/share/radiuspanel/`);
     shell_exec(`chown -R www-data.www-data /usr/share/radiuspanel`);
 } else {
