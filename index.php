@@ -44,13 +44,12 @@ if (isset($_POST["rad_start"])) {
 }
 
 if (isset($_POST["sys_reboot"])) {
-	header("location: /");
-	exit(0);
+	header("location: logout.php");
 	exec("sudo reboot");
 }
 
 if (isset($_POST["sys_off"])) {
-	header("location: /");
+	header("location: logout.php");
 	exec("sudo shutdown -h now");
 }
 
@@ -127,102 +126,100 @@ if (isset($_POST["sys_off"])) {
 		<form action="" method="POST">
 			<div class="row row-cols-1 row-cols-md-2">
 				<div class="col mb-4">
-					<div class="card shadow h-100">
-						<div class="card-header bg-success text-white">
+					<div class="card shadow bg-success text-white h-100">
+						<div class="card-header">
 							<i class="fa fa-info-circle" aria-hidden="true"></i>
 							Informasi FreeRadius
 						</div>
 						<div class="card-body">
-							<table style="width: 70%;">
-								<tr>
-									<td style="width: 150px;">FreeRadius Versi</td>
-									<td style="width: 15px;">:</td>
-									<td><?= $radver; ?></td>
-								</tr>
-								<tr>
-									<td>FreeRadius Status</td>
-									<td>:</td>
-									<td>
-										<?php if ($radstat == "active") : ?>
-											<div class="spinner-grow spinner-grow-sm text-success" role="status">
-												<span class="sr-only">Loading... </span>
-											</div>
-											Aktif
-										<?php elseif ($radstat == "inactive") : ?>
-											<div class="spinner-grow spinner-grow-sm text-danger" role="status">
-												<span class="sr-only">Loading... </span>
-											</div>
-											Inactive
-										<?php endif; ?>
-									</td>
-								</tr>
-								<tr>
-									<td>RadiusPanel Versi</td>
-									<td>:</td>
-									<td>v<?= appsVar()['appsVers']; ?></td>
-								</tr>
-								<tr>
-									<td>Database Versi</td>
-									<td>:</td>
-									<td>v<?= appsVar()['dbVers']; ?></td>
-								</tr>
-							</table>
+							<div class="row pb-2 px-2">
+								<div class="col-lg-5 py-2">Freeradius Version</div>
+								<div class="col py-2 bg-light rounded text-success"><?= $radver; ?></div>
+							</div>
+							<div class="row pb-2 px-2">
+								<div class="col-lg-5 py-2">Freeradius Status</div>
+								<div class="col py-2 bg-light rounded text-success">
+									<?php if ($radstat == "active") : ?>
+										<div class="spinner-grow spinner-grow-sm text-success" role="status">
+											<span class="sr-only">Loading... </span>
+										</div>
+										Aktif
+									<?php elseif ($radstat == "inactive") : ?>
+										<div class="spinner-grow spinner-grow-sm text-danger" role="status">
+											<span class="sr-only">Loading... </span>
+										</div>
+										Inactive
+									<?php endif; ?>
+								</div>
+							</div>
+							<div class="row pb-2 px-2">
+								<div class="col-lg-5 py-2">RadiusPanel Version</div>
+								<div class="col py-2 bg-light rounded text-success">v<?= appsVar()['appsVers']; ?></div>
+							</div>
+							<div class="row pb-2 px-2">
+								<div class="col-lg-5 py-2">Database Version</div>
+								<div class="col py-2 bg-light rounded text-success">v<?= appsVar()['dbVers']; ?></div>
+							</div>
 						</div>
 						<div class="card-footer bg-transparent text-center">
-							<div class="btn-group btn-group-sm">
-								<button class="btn btn-sm btn-success" title="Start Freeradius" type="submit" name="rad_start">
-									<i class="fas fa-play"></i>
-								</button>
-								<button class="btn btn-sm btn-success" title="Stop Freeradius" type="submit" name="rad_stop">
-									<i class="fas fa-stop"></i>
-								</button>
-								<button class="btn btn-sm btn-success" title="Restart Freeradius" type="submit" name="rad_restart">
-									<i class="fas fa-redo-alt"></i>
-								</button>
-								<button class="btn btn-sm btn-success" title="Cek Update" type="button" id="btn-update">
-									<i class="fas fa-sync-alt mr-1"></i>
-								</button>
+							<div class="btn-toolbar justify-content-center">
+								<div class="btn-group btn-group-sm">
+									<button class="btn btn-sm btn-success" title="Start Freeradius" type="submit" name="rad_start">
+										<i class="fas fa-fw fa-play"></i>
+										Start
+									</button>
+									<button class="btn btn-sm btn-success" title="Stop Freeradius" type="submit" name="rad_stop">
+										<i class="fas fa-fw fa-stop"></i>
+										Stop
+									</button>
+									<button class="btn btn-sm btn-success" title="Restart Freeradius" type="submit" name="rad_restart">
+										<i class="fas fa-fw fa-redo-alt"></i>
+										Restart
+									</button>
+								</div>
+								<div class="btn-group btn-group-sm">
+									<button class="btn btn-sm btn-success" title="Cek Update" type="button" id="btn-update">
+										<i class="fas fa-fw fa-sync-alt mr-1"></i>
+										Cek Update
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col mb-4">
-					<div class="card shadow h-100">
-						<div class="card-header bg-danger text-white">
+					<div class="card shadow bg-danger text-white h-100">
+						<div class="card-header">
 							<i class="fas fa-server" aria-hidden="true"></i>
 							Informasi System
 						</div>
 						<div class="card-body">
-							<table style="width: 100%;">
-								<tr>
-									<td style="width: 150px;">Sistem Operasi</td>
-									<td style="width: 15px;">:</td>
-									<td><?= $os; ?></td>
-								</tr>
-								<tr>
-									<td>Prosessor</td>
-									<td>:</td>
-									<td><?= $processor; ?></td>
-								</tr>
-								<tr>
-									<td>Hardisk</td>
-									<td>:</td>
-									<td><?= $hdd; ?></td>
-								</tr>
-								<tr>
-									<td>RAM</td>
-									<td>:</td>
-									<td><?= $ramused; ?> of <?= $ram; ?></td>
-								</tr>
-							</table>
+							<div class="row pb-2 px-2">
+								<div class="col-lg-4 py-2">Sistem Operasi</div>
+								<div class="col py-2 bg-light rounded text-danger"><?= $os; ?></div>
+							</div>
+							<div class="row pb-2 px-2">
+								<div class="col-lg-4 py-2">Processor</div>
+								<div class="col py-2 bg-light rounded text-danger"><?= $processor; ?></div>
+							</div>
+							<div class="row pb-2 px-2">
+								<div class="col-lg-4 py-2">Hardisk</div>
+								<div class="col py-2 bg-light rounded text-danger"><?= $hdd; ?></div>
+							</div>
+							<div class="row pb-2 px-2">
+								<div class="col-lg-4 py-2">RAM</div>
+								<div class="col py-2 bg-light rounded text-danger"><?= $ramused; ?> of <?= $ram; ?></div>
+							</div>
 						</div>
 						<div class="card-footer bg-transparent text-center">
 							<div class="btn-group">
-								<button class="btn btn-sm btn-danger" title="Reboot Server" type="submit" name="sys_reboot">
-									<i class="fas fa-sync-alt"></i>
+								<button class="btn btn-sm btn-danger" title="Reboot Server" type="submit" name="sys_reboot" onclick="return confirm('Server akan dihidupkan ulang, yakin?')">
+									<i class="fas fa-fw fa-sync-alt"></i>
+									Reboot System
 								</button>
-								<button class="btn btn-sm btn-danger" title="Shutdown Server" type="submit" name="sys_off">
-									<i class="fas fa-power-off"></i>
+								<button class="btn btn-sm btn-danger" title="Shutdown Server" type="submit" name="sys_off" onclick="return confirm('Server akan dimatikan, yakin?')">
+									<i class="fas fa-fw fa-power-off"></i>
+									Shutdown System
 								</button>
 							</div>
 						</div>
@@ -249,7 +246,6 @@ if (isset($_POST["sys_off"])) {
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
 				</div>
 			</div>
 		</div>
@@ -277,6 +273,7 @@ if (isset($_POST["sys_off"])) {
 								if (confirm('Update berhasil! Logout sekarang?')) {
 									window.open('logout.php', '_self');
 								} else {
+									$('#updateModal').modal('hide');
 									$(this).children('i').toggleClass('fa-spin');
 									return;
 								}
