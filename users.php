@@ -36,14 +36,14 @@ $navigasi = "user";
 	<?php include 'navigasi.html'; ?>
 
 	<div class="container py-3 pb-5 mb-5">
-		<?php if (isset($_GET['t']) && isset($_GET['s'])) : ?>
+		<div class="d-none" id="alert">
 			<div class="alert alert-info alert-dismissible fade show" role="alert">
-				<?= $_GET['s'] . ' dari ' . $_GET['t'] . ' akun berhasil diimport!'; ?>
+				<span id="alertMessage"></span>
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-		<?php endif; ?>
+		</div>
 		<div class="row">
 			<div class="col">
 				<div class="card shadow">
@@ -55,8 +55,8 @@ $navigasi = "user";
 								<button type="button" class="btn btn-danger btn-sm" title="Hapus Akun Terpilih" id="btn-deleteAccount"><i class="fas fa-trash-alt"></i></button>
 							</div>
 							<div class="btn-group shadow mr-2 mb-2" role="group">
-								<button type="button" class="btn btn-primary btn-sm" title="Pilih Semua/Balikkan pilihan" id="btn-select"><i class="fas fa-check-circle"></i></button>
-								<button type="button" class="btn btn-primary btn-sm" title="Hapus pilihan" id="btn-deselect"><i class="fas fa-minus-circle"></i></button>
+								<button type="button" class="btn btn-info btn-sm" title="Pilih Semua/Balikkan pilihan" id="btn-select"><i class="fas fa-check-circle"></i></button>
+								<button type="button" class="btn btn-info btn-sm" title="Hapus pilihan" id="btn-deselect"><i class="fas fa-minus-circle"></i></button>
 							</div>
 							<div class="btn-group shadow mr-2 mb-2" role="group">
 								<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#importAccount" title="Import Akun" id="btn-import"><i class="fas fa-upload"></i></button>
@@ -256,31 +256,35 @@ $navigasi = "user";
 				]
 			});
 
-			// $('#importForm').on('submit', function(e) {
-			// 	e.preventDefault();
-			// 	var formData = new FormData(this);
-			// 	$.ajax({
-			// 		url: 'ajax/importUser.php',
-			// 		type: 'POST',
-			// 		data: formData,
-			// 		contentType: false,
-			// 		processData: false,
-			// 		dataType: 'json',
-			// 		success: function(response) {
-			// 			$('#alert').toggleClass('d-none');
-			// 			$('#alertMessage').text(response.sukses + ' dari ' + response.total + ' user berhasil diimport!');
-			// 			usertable.ajax.reload(null, false);
-			// 			$('#importAccount').modal('hide');
-			// 		},
-			// 		error: function(xhr, status, error) {
-			// 			console.log(xhr.responseText);
-			// 		}
-			// 	});
-			// });
+			$('#importForm').on('submit', function(e) {
+				e.preventDefault();
+				$('#progress').toggleClass('d-none');
+				var formData = new FormData(this);
+				let file = $('#inputGroupFile01').prop('files');
+				formData.append('file', file[0]);
+				$.ajax({
+					url: 'import.php',
+					type: 'POST',
+					data: formData,
+					contentType: false,
+					processData: false,
+					dataType: 'json',
+					success: function(response) {
+						$('#alert').toggleClass('d-none');
+						$('#alertMessage').text(response.s + ' dari ' + response.t + ' user berhasil diimport!');
+						usertable.ajax.reload(null, false);
+						$('#importAccount').modal('hide');
+					},
+					error: function(xhr, status, error) {
+						console.log(xhr.responseText);
+						$('#progress').toggleClass('d-none');
+					}
+				});
+			});
 
 			$('#addAccount').on('hidden.bs.modal', () => $('#addAccountForm')[0].reset());
 			$('#importAccount').on('hidden.bs.modal', () => {
-				$('#file').val('');
+				$('#inputGroupFile01').val('');
 				$('#progress').addClass('d-none');
 			});
 

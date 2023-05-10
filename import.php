@@ -46,4 +46,4 @@ foreach ($reader as $row) {
     $t++;
 }
 unlink($path);
-header('Location: users.php?t=' . $t . '&s=' . $s);
+echo json_encode(['t' => $t - 1, 's' => $s]);
