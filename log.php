@@ -9,20 +9,6 @@ if (!isset($_SESSION["login"])) {
 
 require 'functions.php';
 
-$log = query("SELECT 
-	radpostauth.username AS auth_username, 
-	radpostauth.reply AS reply, 
-	radpostauth.authdate AS authdate, 
-	organization.username AS org_username, 
-	organization.name AS name, 
-	organization.division AS division,
-	radacct.framedipaddress AS framedipaddress,
-	radacct.callingstationid AS callingstationid
-	FROM radpostauth 
-	LEFT JOIN organization ON radpostauth.username = organization.username 
-	LEFT JOIN radacct ON radpostauth.username = radacct.username
-	ORDER BY authdate DESC");
-
 $navigasi = "";
 $navigasi = "log";
 
@@ -51,7 +37,10 @@ $navigasi = "log";
 		<div class="row">
 			<div class="col">
 				<div class="card shadow">
-					<div class="card-header text-white bg-primary font-weight-bold">LOGS AKSES</div>
+					<div class="card-header text-white bg-primary font-weight-bold d-flex justify-content-between">
+						<span class="pt-1">DATA LOG AKSES</span>
+						<button class="btn btn-sm btn-danger" type="button" id="btn-deleteLog"><i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus</button>
+					</div>
 					<div class="card-body">
 						<div class="table-responsive">
 							<table class="table table-bordered table-striped table-hover w-100" id="datatables">
@@ -67,22 +56,7 @@ $navigasi = "log";
 										<th class="align-middle">Auth<br>Date</th>
 									</tr>
 								</thead>
-								<tbody style="background-color: white">
-									<?php $i = 1; ?>
-									<?php foreach ($log as $row) : ?>
-										<tr>
-											<td class="text-center"><?= $i; ?></td>
-											<td><?= $row["auth_username"]; ?></td>
-											<td><?= $row["name"]; ?></td>
-											<td class="text-center"><?= $row["division"]; ?></td>
-											<td class="text-center"><?= $row["framedipaddress"] ?></td>
-											<td class="text-center"><?= $row["callingstationid"] ?></td>
-											<td class="text-center"><?= $row["reply"]; ?></td>
-											<td class="text-center"><?= $row["authdate"]; ?></td>
-										</tr>
-										<?php $i++; ?>
-									<?php endforeach; ?>
-								</tbody>
+								<tbody></tbody>
 							</table>
 						</div>
 					</div>
@@ -102,12 +76,55 @@ $navigasi = "log";
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#datatables').DataTable({
+			var table = $('#datatables').DataTable({
 				responsive: true,
 				lengthMenu: [
 					[5, 10, 25, 50, -1],
 					[5, 10, 25, 50, 'All'],
 				],
+				ajax: {
+					url: 'ajax/getUserOnline.php',
+					dataSrc: '',
+					type: 'POST'
+				},
+				columns: [{
+						data: 'no'
+					},
+					{
+						data: 'username'
+					},
+					{
+						data: 'name'
+					},
+					{
+						data: 'division'
+					},
+					{
+						data: 'ip'
+					},
+					{
+						data: 'mac'
+					},
+					{
+						data: 'reply'
+					},
+					{
+						data: 'authDate'
+					},
+				],
+				columnDefs: [{
+					className: "text-center",
+					targets: [0, 1, 3, 4, 5, 6, 7]
+				}, {
+					searchable: false,
+					targets: [0]
+				}, ]
+			});
+
+			$('#btn-deleteLog').click(function() {
+				if (confirm('Hapus seluruh data log akses?')) {
+					$.post('ajax/deleteLog.php').then(r => alert(r + ' data berhasil dihapus permanen!')).then(() => table.ajax.reload(null, false));
+				}
 			});
 		});
 	</script>
