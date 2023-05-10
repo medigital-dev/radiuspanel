@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `username` varchar(32) NOT NULL,
   `password` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB;
 
 --
 -- Dumping data for table `admin`
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `nas` (
   `description` varchar(200) DEFAULT 'RADIUS Client',
   PRIMARY KEY (`id`),
   KEY `nasname` (`nasname`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -72,14 +72,14 @@ CREATE TABLE IF NOT EXISTS `nas` (
 DROP TABLE IF EXISTS `organization`;
 CREATE TABLE IF NOT EXISTS `organization` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `name` varchar(256) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `division` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `class` varchar(64) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `username` varchar(128) NOT NULL,
+  `name` varchar(256) DEFAULT NULL,
+  `division` varchar(128) DEFAULT NULL,
+  `class` varchar(64) DEFAULT NULL,
   `registered_at` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=680 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `radacct` (
   KEY `acctinterval` (`acctinterval`),
   KEY `acctstoptime` (`acctstoptime`),
   KEY `nasipaddress` (`nasipaddress`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `radcheck` (
   `value` varchar(253) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `username` (`username`(32))
-) ENGINE=InnoDB AUTO_INCREMENT=680 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `radgroupcheck` (
   `value` varchar(253) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `groupname` (`groupname`(32))
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `radgroupreply` (
   `value` varchar(253) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `groupname` (`groupname`(32))
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `radpostauth` (
   `reply` varchar(32) NOT NULL DEFAULT '',
   `authdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -207,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `radreply` (
   `value` varchar(253) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `username` (`username`(32))
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -221,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `radusergroup` (
   `groupname` varchar(64) NOT NULL DEFAULT '',
   `priority` int NOT NULL DEFAULT '1',
   KEY `username` (`username`(32))
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
