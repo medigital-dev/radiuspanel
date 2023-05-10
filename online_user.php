@@ -9,8 +9,6 @@ if (!isset($_SESSION["login"])) {
 
 require 'functions.php';
 
-$online = query("SELECT * FROM radacct LEFT JOIN organization ON radacct.username = organization.username ORDER BY radacct.acctstarttime DESC");
-
 $navigasi = "";
 $navigasi = "user";
 
@@ -39,7 +37,10 @@ $navigasi = "user";
 		<div class="row">
 			<div class="col">
 				<div class="card shadow">
-					<div class="card-header text-white bg-primary font-weight-bold">DATA AKUN ONLINE</div>
+					<div class="card-header text-white bg-primary font-weight-bold d-flex justify-content-between">
+						<span class="pt-1">DATA AKUN ONLINE</span>
+						<button class="btn btn-sm btn-danger" type="button" id="btn-deleteOnline"><i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus</button>
+					</div>
 					<div class="card-body">
 						<div class="table-responsive">
 							<table class="table table-bordered table-striped table-hover w-100" id="datatables">
@@ -55,36 +56,7 @@ $navigasi = "user";
 										<th class="align-middle">Up<br>Time</th>
 									</tr>
 								</thead>
-								<tbody>
-									<?php $i = 1; ?>
-									<?php foreach ($online as $row) : ?>
-										<?php $username = $row["username"];
-										$detik = $row["acctsessiontime"];
-										$jam = floor($row["acctsessiontime"] / 3600);
-										$sisaJam = $detik - ($jam * 3600);
-										$menit = floor($sisaJam / 60);
-										$sisaMenit = $sisaJam - ($menit * 60);
-										$sisaDetik = $detik - ($jam * 3600) - ($menit * 60);
-
-										?>
-										<tr>
-											<td class="text-center"><?= $i; ?></td>
-											<td><?= $row["username"]; ?></td>
-											<td><?= $row["name"]; ?></td>
-											<td><?= $row["division"]; ?></td>
-											<td class="text-center"><?= $row["framedipaddress"]; ?></td>
-											<td class="text-center"><?= $row["callingstationid"]; ?></td>
-											<td class="text-center"><?= $row["acctstarttime"]; ?></td>
-
-											<td class="text-center">
-												<?= ($jam == "0") ? "" : "$jam jam"; ?>
-												<?= ($menit == "0") ? "" : " $menit menit"; ?>
-												<?= ($sisaDetik == "0") ? "" : "$sisaDetik detik"; ?>
-											</td>
-										</tr>
-										<?php $i++; ?>
-									<?php endforeach; ?>
-								</tbody>
+								<tbody></tbody>
 							</table>
 						</div>
 					</div>
@@ -104,12 +76,55 @@ $navigasi = "user";
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#datatables').DataTable({
+			var table = $('#datatables').DataTable({
 				responsive: true,
 				lengthMenu: [
 					[5, 10, 25, 50, -1],
 					[5, 10, 25, 50, 'All'],
 				],
+				ajax: {
+					url: 'ajax/getUserOnline.php',
+					dataSrc: '',
+					type: 'POST'
+				},
+				columns: [{
+						data: 'no'
+					},
+					{
+						data: 'username'
+					},
+					{
+						data: 'name'
+					},
+					{
+						data: 'division'
+					},
+					{
+						data: 'ip'
+					},
+					{
+						data: 'mac'
+					},
+					{
+						data: 'startTime'
+					},
+					{
+						data: 'upTime'
+					},
+				],
+				columnDefs: [{
+					className: "text-center",
+					targets: [0, 1, 3, 4, 5, 6, 7]
+				}, {
+					searchable: false,
+					targets: [0, 5, 6, 7]
+				}, ]
+			});
+
+			$('#btn-deleteOnline').click(function() {
+				if (confirm('Hapus seluruh data log akun online?')) {
+					$.post('ajax/deleteOnline.php').then(r => alert(r + ' data berhasil dihapus permanen!')).then(() => table.ajax.reload(null, false));
+				}
 			});
 		});
 	</script>
