@@ -112,8 +112,8 @@ function changepassword($data)
 function appsVar()
 {
     $data = [
-        'appsVers' => '1.4',
-        'dbVers' => '1.0'
+        'appsVers' => '1.5',
+        'dbVers' => '1.1'
     ];
     return $data;
 }
