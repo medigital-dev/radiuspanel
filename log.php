@@ -82,8 +82,11 @@ $navigasi = "log";
 					[5, 10, 25, 50, -1],
 					[5, 10, 25, 50, 'All'],
 				],
+				language: {
+					url: 'js/id.json',
+				},
 				ajax: {
-					url: 'ajax/getUserOnline.php',
+					url: 'ajax/getLogAccess.php',
 					dataSrc: '',
 					type: 'POST'
 				},
@@ -126,6 +129,8 @@ $navigasi = "log";
 					$.post('ajax/deleteLog.php').then(r => alert(r + ' data berhasil dihapus permanen!')).then(() => table.ajax.reload(null, false));
 				}
 			});
+
+			setInterval(() => table.ajax.reload(null, false), 2000);
 		});
 	</script>
 
