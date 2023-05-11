@@ -42,6 +42,7 @@ $navigasi = "user";
 
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>RadiusPanel - Edit User</title>
 	<link rel="shortcut icon" href="img/icon_RadiusPanel.png" type="image/x-icon">
 	<link rel="stylesheet" href="css/fontawesome.css">
@@ -53,7 +54,7 @@ $navigasi = "user";
 
 	<?php include 'navigasi.html'; ?>
 
-	<div class="container py-3 mb-5">
+	<div class="container py-3" style="margin-bottom: 5rem;">
 		<div class="row">
 			<div class="col-lg-4 mx-auto">
 				<div class="card shadow">
