@@ -16,7 +16,7 @@ $navigasi = "home";
 
 // jumlah
 $jmlUser = count(query("SELECT * FROM radcheck"));
-$jmlOnline = count(query("SELECT * FROM radacct WHERE acctstoptime = NULL"));
+$jmlOnline = count(query("SELECT * FROM radacct WHERE acctstoptime = ''"));
 $jmlLog = count(query("SELECT * FROM radpostauth"));
 
 // run
