@@ -24,16 +24,16 @@ $log = query("SELECT
 
 $data = [];
 $i = 1;
-foreach ($user as $row) {
+foreach ($log as $row) {
     $temp = [
         'no' => $i++,
         'username' => '<code>' . $row['auth_username'] . '</code>',
         'name' => $row['name'],
         'division' => $row['division'],
-        'ip' => $row["framedipaddress"],
-        'mac' => $row["callingstationid"],
-        'reply' => $row["reply"],
-        'authDate' => $row["authdate"],
+        'ip' => $row['framedipaddress'],
+        'mac' => $row['callingstationid'],
+        'reply' => $row['reply'],
+        'authDate' => $row['authdate'],
     ];
     array_push($data, $temp);
 }
