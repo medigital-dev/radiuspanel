@@ -39,7 +39,10 @@ $navigasi = "log";
 				<div class="card shadow">
 					<div class="card-header text-white bg-primary font-weight-bold d-flex justify-content-between">
 						<span class="pt-1">DATA LOG AKSES</span>
-						<button class="btn btn-sm btn-danger" type="button" id="btn-deleteLog"><i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus</button>
+						<div class="btn-group">
+							<button class="btn btn-sm btn-primary" type="button" id="btn-reload" title="Reload data"><i class="fas fa-sync-alt fa-fw"></i></button>
+							<button class="btn btn-sm btn-danger" type="button" id="btn-deleteLog"><i class="fas fa-trash-alt fa-fw"></i></button>
+						</div>
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
@@ -130,7 +133,7 @@ $navigasi = "log";
 				}
 			});
 
-			setInterval(() => table.ajax.reload(null, false), 2000);
+			$('#btn-reload').click(() => table.ajax.reload(null, false));
 		});
 	</script>
 

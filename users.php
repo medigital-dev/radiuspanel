@@ -61,6 +61,9 @@ $navigasi = "user";
 							<div class="btn-group shadow mr-2 mb-2" role="group">
 								<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#importAccount" title="Import Akun" id="btn-import"><i class="fas fa-upload"></i></button>
 							</div>
+							<div class="btn-group shadow mr-2 mb-2" role="group">
+								<button type="button" class="btn btn-warning btn-sm" title="Reload Tabel" id="btn-reload"><i class="fas fa-sync-alt"></i></button>
+							</div>
 						</div>
 						<div class="table-responsive">
 							<table class="table table-bordered table-hover w-100" id="datatables" onmouseleave="hidePassword()">
@@ -346,6 +349,8 @@ $navigasi = "user";
 					$(this).toggleClass('table-success');
 				})
 			});
+
+			$('#btn-reload').click(() => usertable.ajax.reload(null, false));
 		});
 	</script>
 
