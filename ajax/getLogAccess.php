@@ -32,7 +32,7 @@ foreach ($log as $row) {
         'division' => $row['division'],
         'ip' => $row['framedipaddress'],
         'mac' => $row['callingstationid'],
-        'reply' => $row['reply'],
+        'reply' => ($row['reply'] == 'Access-Accept') ? '<span class="badge badge-pill badge-success">Accept</span>' : '<span class="badge badge-pill badge-danger">Reject</span>',
         'authDate' => $row['authdate'],
     ];
     array_push($data, $temp);
