@@ -16,12 +16,12 @@ $navigasi = "home";
 
 // jumlah
 $jmlUser = count(query("SELECT * FROM radcheck"));
-$jmlOnline = count(query("SELECT * FROM radacct WHERE acctstoptime = ''"));
+$jmlOnline = count(query("SELECT * FROM radacct WHERE acctstoptime IS NULL"));
 $jmlLog = count(query("SELECT * FROM radpostauth"));
 
 // run
 $radver = exec("sudo freeradius -v | grep 'Version' | awk 'FNR == 2 {print $3}'");
-$radstat = exec("/etc/init.d/freeradius status | grep 'Active:' | awk '{print $2}'");
+$radstat = exec("sudo /etc/init.d/freeradius status | grep 'Active:' | awk '{print $2}'");
 $os = exec("lsb_release -d | awk '{print $2,$3,$4,$5}'");
 $processor = exec("cat /proc/cpuinfo | grep 'model name' | cut -d: -f2");
 $hdd = exec("df -h | grep sda | awk '{print $2}'");

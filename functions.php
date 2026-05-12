@@ -1,5 +1,5 @@
 <?php
-include 'dbconn.php';
+include 'database/dbconn.php';
 
 function query($query)
 {
